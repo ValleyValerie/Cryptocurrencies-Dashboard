@@ -1,53 +1,38 @@
-'use client';
+// src/app/api/socket/route.ts
+import { Server } from "socket.io";
+import { NextResponse } from "next/server";
 
-import { createContext, useContext, useEffect, useState } from 'react';
-import { io, Socket } from 'socket.io-client';
+export const GET = (req: Request) => {
+  return NextResponse.json({ message: "Socket endpoint active" });
+};
 
-interface SocketContextType {
-  socket: Socket | null;
-  isConnected: boolean;
-}
+// Socket.io setup
+let io: Server | undefined;
 
-const SocketContext = createContext<SocketContextType>({
-  socket: null,
-  isConnected: false,
-});
-
-export function SocketProvider({ children }: { children: React.ReactNode }) {
-  const [socket, setSocket] = useState<Socket | null>(null);
-  const [isConnected, setIsConnected] = useState(false);
-
-  useEffect(() => {
-    // connect directly to the same API route
-    const socketInstance = io({
-      path: '/api/socket',
-      transports: ['websocket'],
+export default function handler(req: any, res: any) {
+  if (!io) {
+    io = new Server(res.socket.server, {
+      path: "/api/socket",
+      transports: ["websocket"],
     });
 
-    socketInstance.on('connect', () => {
-      console.log('✅ Socket connected:', socketInstance.id);
-      setIsConnected(true);
+    io.on("connection", (socket) => {
+      console.log("Client connected:", socket.id);
+
+      // Example: send dummy data every second
+      const interval = setInterval(() => {
+        socket.emit("data", { timestamp: Date.now(), value: Math.random() * 100 });
+      }, 1000);
+
+      socket.on("disconnect", () => {
+        console.log("Client disconnected");
+        clearInterval(interval);
+      });
     });
+  }
 
-    socketInstance.on('disconnect', () => {
-      console.log('❌ Socket disconnected');
-      setIsConnected(false);
-    });
-
-    setSocket(socketInstance);
-
-    return () => {
-      socketInstance.disconnect();
-    };
-  }, []);
-
-  return (
-    <SocketContext.Provider value={{ socket, isConnected }}>
-      {children}
-    </SocketContext.Provider>
-  );
+  // Required by Next.js to signal that the socket is set up
+  res.end();
 }
 
-export function useSocket() {
-  return useContext(SocketContext);
-}
+
