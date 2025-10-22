@@ -34,3 +34,29 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+# 🚀 Real-Time Dashboard
+
+A modern, full-featured dashboard application built with Next.js, TypeScript, Socket.io, and Recharts.
+
+## ✨ Features
+
+### Core Features
+- ✅ **JWT Authentication** - Secure login with JSON Web Tokens
+- ✅ **Real-Time Updates** - Live data streaming via WebSocket (Socket.io)
+- ✅ **Dark/Light Theme** - Seamless theme switching with system preference support
+- ✅ **Responsive Design** - Mobile-first design with Tailwind CSS
+- ✅ **Dynamic Charts** - Interactive charts with multiple visualization types
+
+### Advanced Features
+- 🎨 **User Preferences** - Customizable chart types and refresh intervals
+- 📊 **Multiple Chart Types** - Line, Bar, and Area charts
+- 🔍 **Table Filtering** - Search and filter table data in real-time
+- 📁 **Data Export** - Export data to CSV and JSON formats
+- 🔔 **Smart Notifications** - Real-time alerts for important events
+- 🔄 **Auto-Reconnection** - Automatic WebSocket reconnection on disconnect
+
+## 🛠️ Tech Stack
+
+- **Frontend**: Next.js 14 (App Router), TypeScript, Tailwind CSS
+- **Charts**:
