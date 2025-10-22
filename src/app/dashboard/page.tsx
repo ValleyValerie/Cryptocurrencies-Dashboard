@@ -65,14 +65,14 @@ export default function DashboardPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+    <div className="min-h-screen bg-gray-50  dark:bg-gray-900">
       <Navbar userName={user.name} />
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Stats Grid */}
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4 mb-8">
           <StatsCard
-            title="Total Users"
+            title="Total market cap"
             value={stats.totalUsers.toLocaleString()}
             trend={parseFloat(stats.growth.toString())}
             trendLabel="from last month"
@@ -83,7 +83,7 @@ export default function DashboardPage() {
             }
           />
           <StatsCard
-            title="Active Users"
+            title="24h trading volume"
             value={stats.activeUsers.toLocaleString()}
             icon={
               <svg className="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -115,11 +115,11 @@ export default function DashboardPage() {
 
         {/* Chart */}
         <div className="mb-8">
-          <LiveChart data={chartData} title="Real-Time Activity" />
+          <LiveChart data={chartData}  />
         </div>
 
         {/* Table */}
-        <DataTable data={tableData} title="Recent Projects" />
+        <DataTable data={tableData} title="Top cryptocurrencies" />
 
         {/* Connection Status */}
         {!isConnected && (

@@ -1,17 +1,36 @@
-// src/app/layout.tsx
-import React from 'react';
-import './globals.css'; // optional global styles
+import type { Metadata } from "next";
+import { Geist, Geist_Mono } from "next/font/google";
+import "./globals.css";
+import { SocketProvider } from "@/contexts/SocketContext";
 
-export const metadata = {
-  title: 'Real-Time Dashboard',
-  description: 'A real-time dashboard app',
+const geistSans = Geist({
+  variable: "--font-geist-sans",
+  subsets: ["latin"],
+});
+
+const geistMono = Geist_Mono({
+  variable: "--font-geist-mono",
+  subsets: ["latin"],
+});
+
+export const metadata: Metadata = {
+  title: "Live Dashboard",
+  description: "Real-time cryptocurrency dashboard",
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
   return (
     <html lang="en">
-      <body>
-        {children}
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      >
+        <SocketProvider>
+          {children}
+        </SocketProvider>
       </body>
     </html>
   );
