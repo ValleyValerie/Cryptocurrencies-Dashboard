@@ -1,6 +1,5 @@
 'use client';
 
-import ThemeToggle from './ThemeToggle';
 import { useRouter } from 'next/navigation';
 import { useSocket } from '@/contexts/SocketContext';
 
@@ -57,7 +56,6 @@ export default function Navbar({ userName, onSettingsClick }: NavbarProps) {
                 </svg>
               </button>
             )}
-            <ThemeToggle />
             {userName && (
               <button
                 onClick={handleLogout}

@@ -34,14 +34,14 @@ export default function DataTable({ title }: DataTableProps) {
   }, []);
 
   const filteredAndSorted = useMemo(() => {
-    let filtered = coins.filter((coin) =>
-      coin.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      coin.symbol.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+  const filtered = coins.filter((coin) =>
+    coin.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    coin.symbol.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
-    filtered.sort((a, b) => {
-      let aValue = a[sortField];
-      let bValue = b[sortField];
+  filtered.sort((a, b) => {
+    const aValue = a[sortField];
+    const bValue = b[sortField];
 
       if (typeof aValue === 'number' && typeof bValue === 'number') {
         return sortDirection === 'asc' ? aValue - bValue : bValue - aValue;
