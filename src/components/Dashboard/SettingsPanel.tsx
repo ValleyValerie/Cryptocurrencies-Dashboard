@@ -75,9 +75,8 @@ export default function SettingsPanel({ preferences, onUpdate }: SettingsPanelPr
                 </label>
                 <select
                   value={localPrefs.chartType}
-                  onChange={(e) => setLocalPrefs({ ...localPrefs, chartType: e.target.value as any })}
-                  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500"
-                >
+                  onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setLocalPrefs({ ...localPrefs, chartType: e.target.value as UserPreferences['chartType'] })}
+                  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500">
                   <option value="line">Line Chart</option>
                   <option value="bar">Bar Chart</option>
                   <option value="area">Area Chart</option>

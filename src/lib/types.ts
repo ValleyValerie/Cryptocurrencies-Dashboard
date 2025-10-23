@@ -8,9 +8,9 @@ export interface User {
 }
 
 export interface UserPreferences {
-  theme: 'light' | 'dark';
   chartType: 'line' | 'bar' | 'area';
   refreshInterval: number;
+  theme: 'light' | 'dark';
 }
 
 export interface LoginCredentials {

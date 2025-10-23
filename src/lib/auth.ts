@@ -1,7 +1,13 @@
 // src/lib/auth.ts
-import jwt from 'jsonwebtoken';
+import jwt, { JwtPayload } from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 import { User } from './types';
+
+interface DecodedToken extends JwtPayload {
+  id: string;
+  email: string;
+  name: string;
+}
 
 const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key-change-in-production';
 
@@ -40,13 +46,14 @@ export function generateToken(user: User): string {
   );
 }
 
-export function verifyToken(token: string): any {
+export function verifyToken(token: string): JwtPayload | string | null {
   try {
-    return jwt.verify(token, JWT_SECRET);
-  } catch (error) {
+    return jwt.verify(token, JWT_SECRET) as JwtPayload;
+  } catch {
     return null;
   }
 }
+
 
 export async function authenticateUser(email: string, password: string): Promise<User | null> {
   const user = users.find(u => u.email === email);
@@ -72,13 +79,14 @@ export async function authenticateUser(email: string, password: string): Promise
 
 export function getUserFromToken(token: string): User | null {
   const decoded = verifyToken(token);
-  
-  if (!decoded) {
+
+  if (!decoded || typeof decoded === 'string') {
     return null;
   }
 
-  const user = users.find(u => u.id === decoded.id);
-  
+  const { id } = decoded as DecodedToken;
+  const user = users.find(u => u.id === id);
+
   if (!user) {
     return null;
   }
