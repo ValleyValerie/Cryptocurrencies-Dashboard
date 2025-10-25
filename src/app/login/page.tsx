@@ -3,6 +3,11 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
+interface DataType {
+  id: string;
+  value: number;
+}
+
 export default function LoginPage() {
   const [email, setEmail] = useState('demo@example.com');
   const [password, setPassword] = useState('demo123');

@@ -34,4 +34,3 @@ export default function handler(req: any, res: any) {
   // Required by Next.js to signal that the socket is set up
   res.end();
 }
-
